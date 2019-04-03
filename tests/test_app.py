@@ -16,7 +16,7 @@ def client():
 
 def test_health(client):
     """
-    Test that the /health endpoint returns OK
+    Test that the /health endpoint returns OK for HTTP GET
     """
     rv = client.get('/health')
     assert b'OK' in rv.data
