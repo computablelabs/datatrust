@@ -3,7 +3,7 @@ A Computable Datatrust implementation written in Python
 
 ## Setup
 
-Tested with Python 3.7
+Tested with Python 3.7. Other 3.x versions may work as well
 
 - Create a python3.7 virtual environment `{PATH_TO_PYTHON_3.7} -m venv .env`
 
