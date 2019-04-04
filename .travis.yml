@@ -1,7 +1,18 @@
+dist: xenial
 language: python
 python:
-  - "3.6"
-# install:
-# - pip install -r requirements.txt
-# script:
-# - pytest
+  - "3.7"
+install:
+  - pip install -r requirements.txt
+jobs:
+  include:
+    - stage: test
+      name: "Tests"
+      script: python -m pytest
+    - stage: scan
+      name: "Security Scan"
+      script: skip
+    - stage: deploy
+      if: branch = master
+      name: "Deploy to Production"
+      script: skip
