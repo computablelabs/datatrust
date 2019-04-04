@@ -1,5 +1,6 @@
 # datatrust
-A Computable Datatrust implementation written in Python
+A Computable Datatrust implementation written in Python 
+[![Build Status](https://travis-ci.org/computablelabs/datatrust.svg?branch=master)](https://travis-ci.org/computablelabs/datatrust)
 
 ## Setup
 
