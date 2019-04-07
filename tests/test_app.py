@@ -1,5 +1,6 @@
 """
 Tests for app.py
+All API endpoint tests live here
 """
 
 import pytest
@@ -21,9 +22,16 @@ def test_health(client):
     rv = client.get('/health')
     assert b'OK' in rv.data
 
-def test_listing(client):
+def test_get_listing(client):
     """
-    Test that the /listing endpoint returns OK for HTTP POST
+    Test the HTTP GET request to the listing endpoint
     """
-    rv = client.post('/listing')
-    assert b'OK' in rv.data
+    rv = client.get('/api/v1/listing')
+    assert b'this is a listing' in rv.data
+
+def test_listing_empty_body(client):
+    """
+    Test that a POST to the listing endpoint with no data returns an error
+    """
+    rv = client.post('/api/v1/listing', json='')
+    assert b'No input data provided' in rv.data

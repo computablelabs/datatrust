@@ -15,7 +15,10 @@ Tested with Python 3.7. Other 3.x versions may work as well
 
 ## Running Locally
 
-- `FLASK_APP=app.py python -m flask run`
+- For development work:
+- `FLASK_ENV=development FLASK_APP=app.py python -m flask run`
+- For production:
+- `FLASK_CONFIGURATION=production FLASK_APP=app.py python -m flask run`
 
 ## Testing
 
