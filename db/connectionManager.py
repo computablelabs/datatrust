@@ -7,8 +7,8 @@ from botocore.exceptions import ClientError
 
 class ConnectionManager:
 
-    def __init__(self, db_url, local, table_name):
-        self.db = boto3.resource('dynamodb', endpoint_url=db_url)
+    def __init__(self, db_url, local, table_name, region):
+        self.db = boto3.resource('dynamodb', region, endpoint_url=db_url)
         self.table_name = table_name
 
         if local:

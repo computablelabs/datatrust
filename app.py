@@ -24,10 +24,8 @@ api_blueprint = Blueprint('api', __name__)
 api = Api(api_blueprint)
 print(app.config['STARTUP_MSG'])
 
-# Initialize DB Connection if not in test env
-# TODO: this is a poor workaround
-if CONFIGS[config_name] is not 'test':
-    db = ConnectionManager(app.config['DB_URL'], app.config['LOCAL'], app.config['TABLE_NAME'])
+# Initialize DB Connection
+db = ConnectionManager(app.config['DB_URL'], app.config['LOCAL'], app.config['TABLE_NAME'], app.config['REGION'])
 
 # Endpoints
 api.add_resource(Listing, '/api/v1/listing', resource_class_kwargs={'db': db})

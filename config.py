@@ -7,6 +7,7 @@ class BaseConfig(object):
     DEBUG = False
     TESTING = False
     STARTUP_MSG = 'Using BaseConfig'
+    REGION = 'us-west-1'
 
 class DevConfig(BaseConfig):
     """
