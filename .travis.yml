@@ -8,7 +8,7 @@ jobs:
   include:
     - stage: test
       name: "Tests"
-      script: python -m pytest
+      script: make test
     - stage: scan
       name: "Security Scan"
       script: skip
