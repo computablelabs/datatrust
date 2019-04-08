@@ -9,6 +9,9 @@ class Listing(Resource):
     """
     Listing definition
     """
+    def __init__(self, db):
+        self.db = db
+
     def get(self):
         return {'listing': 'this is a listing'}
 
@@ -18,4 +21,4 @@ class Listing(Resource):
         if not json_data:
             return {'message': 'No input data provided'}, 400
         print(type(json_data))
-        return f'You posted {data} with data'
+        return f'You posted {self.db} with data'

@@ -5,7 +5,7 @@ A Computable Datatrust implementation written in Python
 
 ## Setup
 
-Tested with Python 3.7. Other 3.x versions may work as well
+Tested with Python 3.7. Other 3.x versions may work as well. Python2 will not work.
 
 - Create a python3.7 virtual environment `{PATH_TO_PYTHON_3.7} -m venv .env`
 
@@ -16,12 +16,12 @@ Tested with Python 3.7. Other 3.x versions may work as well
 ## Running Locally
 
 - For development work:
-- `FLASK_ENV=development FLASK_APP=app.py python -m flask run`
+- `make dev`
 - For production:
 - `FLASK_CONFIGURATION=production FLASK_APP=app.py python -m flask run`
 
 ## Testing
 
-- `python -m pytest`
+- `make test`
 
 - _NOTE: Two warnings appear in test results due to unresolved deprecation warnings in Jinja2_
