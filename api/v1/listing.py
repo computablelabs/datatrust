@@ -20,5 +20,12 @@ class Listing(Resource):
         data = json_data
         if not json_data:
             return {'message': 'No input data provided'}, 400
-        print(type(json_data))
-        return f'You posted {self.db} with data'
+        response = self.db.add_listing(json_data)
+        if response == 'Success':
+            return {'message': 'Success'}, 201
+        elif response == 'Error writing to database':
+            return {'message': 'Error writing to database'}, 500
+        elif response == 'ValidationException':
+            return {'message': 'Improper payload format'}, 400
+        else:
+            return {'message': 'Unknown status from database returned'}, 500

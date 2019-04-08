@@ -9,6 +9,7 @@ class ConnectionManager:
 
     def __init__(self, db_url, local, table_name):
         self.db = boto3.resource('dynamodb', endpoint_url=db_url)
+        self.table_name = table_name
 
         if local:
             # If running locally, create the table if needed. 
@@ -48,5 +49,16 @@ class ConnectionManager:
         """
         Add a listing to the table
         """
-        # TODO: write the payload to the db
-        pass
+        try:
+            table = self.db.Table(self.table_name)
+            response = table.put_item(
+                Item=payload
+            )
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                return 'Success'
+            else:
+                return 'Error writing to database'
+        except ClientError as exc:
+            if exc.response['Error']['Code'] == 'ValidationException':
+                return 'ValidationException'
+                # TODO: Add 'data' array to db schema

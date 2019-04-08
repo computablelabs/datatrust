@@ -17,8 +17,33 @@ Tested with Python 3.7. Other 3.x versions may work as well. Python2 will not wo
 
 - For development work:
 - `make dev`
+
+_*Dev requires a local dynamodb database. Download it [here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)*_
+
+
 - For production:
 - `FLASK_CONFIGURATION=production FLASK_APP=app.py python -m flask run`
+
+## Usage
+
+Post data to the API endpoint `api/v1/listing` 
+
+Curl example:
+
+```
+curl -X POST \
+  http://localhost:5000/api/v1/listing \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"listing": "willtest1",
+	"data": [
+		{"foo": "bar"},
+		{"baz": "bang"}
+	]
+}'
+```
+
+`listing` is required in the json payload, `data` is currently not
 
 ## Testing
 
