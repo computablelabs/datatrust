@@ -28,6 +28,7 @@ class TestConfig(BaseConfig):
     LOCAL = False
     DB_URL = None
     TABLE_NAME = 'drive_test'
+    STARTUP_MSG = 'Using TestConfig'
 
 class ProdConfig(BaseConfig):
     """
