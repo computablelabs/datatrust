@@ -12,7 +12,7 @@ class ConnectionManager:
         self.table_name = table_name
 
         if local:
-            # If running locally, create the table if needed. 
+            # If running locally, create the table if needed.
             # Staging/Prod should not create tables automatically
             self.setup_local_db(table_name)
 
@@ -45,9 +45,33 @@ class ConnectionManager:
             if riu.response['Error']['Code'] == 'ResourceInUseException':
                 print('Table already created, moving on...')
 
+    def get_listing(self, payload):
+        """
+        Return a listing from the database
+        :param payload: dict
+        :return: dict
+        """
+        try:
+            table = self.db.Table(self.table_name)
+            response = table.get_item(
+                Key={
+                    'listing': payload['listing']
+                }
+            )
+            print(response)
+            if 'Item' in response:
+                return response['Item']
+            else:
+                return 'No items matching query'
+        except Exception as exc:
+            print(exc)
+            return 'Error retrieving record'
+
     def add_listing(self, payload):
         """
         Add a listing to the table
+        :param payload: dict
+        :return: string
         """
         try:
             table = self.db.Table(self.table_name)
@@ -62,3 +86,27 @@ class ConnectionManager:
             if exc.response['Error']['Code'] == 'ValidationException':
                 return 'ValidationException'
                 # TODO: Add 'data' array to db schema
+            else:
+                raise
+
+    def delete_listing(self, payload):
+        """
+        Delete a listing entirely from the db
+        :param payload: dict
+        :return: string
+        """
+        try:
+            table = self.db.Table(self.table_name)
+            response = table.delete_item(
+                Key={
+                    'listing': payload['listing']
+                }
+            )
+            print(response)
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                return 'Listing successfully deleted'
+            else:
+                return 'Listing not deleted, but no error returned'
+        except Exception as exc:
+            print(f'Error code: {exc}')
+            return 'Error deleting record'

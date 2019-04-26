@@ -2,7 +2,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Description:
-  AWS Cloudformation template for launching the Drive Datatrust as an 
+  AWS Cloudformation template for launching the Drive Datatrust as an
   ECS Fargate Service. An existing ECS Fargate Cluster is required
 
 Parameters:
@@ -40,10 +40,9 @@ Parameters:
     Type: String
     Description: Security groups for ECS Service
 
-#  SSLCertArn:
-##    TODO: Move computable.io domain into AWS
-#    Type: String
-#    Description: AWS ARN for SSL Cert used by Load Balancer
+  SSLCertArn:
+    Type: String
+    Description: AWS ARN for SSL Cert used by Load Balancer
 
   VpcId:
     Type: String
@@ -51,12 +50,12 @@ Parameters:
 
   CPU:
     Type: Number
-    Default: 256
+    Default: 512
     Description: CPU units to allocate to task definition
 
   Memory:
     Type: Number
-    Default: 512
+    Default: 1024
     Description: Memory (MB) to allocate to task definition
 
   ImageUrl:
@@ -71,6 +70,26 @@ Parameters:
   ExecutionRoleArn:
     Type: String
     Description: ARN used for executing ECS task
+
+  DBURL:
+    Type: String
+    Description: Database connection URL
+
+  TABLENAME:
+    Type: String
+    Description: Database table
+
+  REGION:
+    Type: String
+    Description: AWS Region
+
+  HostedZoneId:
+    Type: String
+    Description: AWS Hosted Zone for DNS
+
+  DNSName:
+    Type: String
+    Description: DNS name for the service
 
 Outputs:
   LBSubnets:
@@ -94,6 +113,16 @@ Resources:
           Value: "Load Balancer"
       Subnets: !Split [",", !Ref LBSubnets]
       SecurityGroups: !Split [",", !Ref LBSecGroups]
+
+  ServiceDNSName:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DNSName
+      TTL: '300'
+      Type: 'CNAME'
+      ResourceRecords:
+        - !GetAtt LoadBalancer.DNSName
 
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -126,11 +155,9 @@ Resources:
           Type: 'forward'
       LoadBalancerArn: !Ref LoadBalancer
       Port: 443
-      Protocol: 'HTTP'
-      # TODO: Switch to HTTPS after domain move
-#      Protocol: 'HTTPS'
-#      Certificates:
-#        - CertificateArn: !Ref SSLCertArn
+      Protocol: 'HTTPS'
+      Certificates:
+        - CertificateArn: !Ref SSLCertArn
 
   LoadBalancerRedirectListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
@@ -162,6 +189,14 @@ Resources:
           Environment:
             - Name: FLASK_ENVIRONMENT
               Value: production
+            - Name: FLASK_CONFIGURATION
+              Value: production
+            - Name: DB_URL
+              Value: !Ref DBURL
+            - Name: TABLE_NAME
+              Value: !Ref TABLENAME
+            - Name: REGION
+              Value: !Ref REGION
           LogConfiguration:
             LogDriver: awslogs
             Options:
