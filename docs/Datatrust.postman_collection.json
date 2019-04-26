@@ -36,6 +36,88 @@
 				"description": "Create a listing in the Datatrust API"
 			},
 			"response": []
+		},
+		{
+			"name": "Get Listing",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listing\": \"willtest1\"\n}"
+				},
+				"url": {
+					"raw": "{{hostname}}/api/v1/listing",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"listing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{hostname}}/health",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Listing",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listing\": \"willtest1\"\n}"
+				},
+				"url": {
+					"raw": "{{hostname}}/api/v1/listing",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"listing"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
