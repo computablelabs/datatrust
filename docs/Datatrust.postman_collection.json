@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "090c6de4-8cd0-4fb2-b3f7-3eafabcc43ee",
+		"name": "Datatrust",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Listing",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listing\": \"willtest1\",\n    \"data\": [\n        {\n            \"foo\": \"bar\"\n        },\n        {\n            \"baz\": \"bang\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/listing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"listing"
+					]
+				},
+				"description": "Create a listing in the Datatrust API"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Listing",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listing\": \"willtest1\"\n}"
+				},
+				"url": {
+					"raw": "{{hostname}}/api/v1/listing",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"listing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{hostname}}/health",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Listing",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listing\": \"willtest1\"\n}"
+				},
+				"url": {
+					"raw": "{{hostname}}/api/v1/listing",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"listing"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

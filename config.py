@@ -35,5 +35,8 @@ class ProdConfig(BaseConfig):
     """
     Configuration for production
     """
-    DB = os.getenv('DB')
     STARTUP_MSG = 'Using ProdConfig'
+    LOCAL = False
+    DB_URL=os.getenv('DB_URL')
+    TABLE_NAME=os.getenv('TABLE_NAME')
+    REGION=os.getenv('REGION')

@@ -26,8 +26,8 @@ def test_get_listing(client):
     """
     Test the HTTP GET request to the listing endpoint
     """
-    rv = client.get('/api/v1/listing')
-    assert b'this is a listing' in rv.data
+    rv = client.get('/api/v1/listing', json='')
+    assert b'No input data provided' in rv.data
 
 def test_listing_empty_body(client):
     """
