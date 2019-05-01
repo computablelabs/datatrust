@@ -1,7 +1,15 @@
 [![Build Status](https://travis-ci.org/computablelabs/datatrust.svg?branch=master)](https://travis-ci.org/computablelabs/datatrust)
 
 # datatrust
-A Computable Datatrust implementation written in Python 
+A Computable Datatrust implementation written in Python
+
+## Documentation
+
+Endpoints and available methods can be auto-discovered at `{host_URL}/api/spec.json`
+
+Swagger docs for individual endpoints can be found at `{host_URL}/api/v1/listing.help.html` or can be obtained programmatically at `{host_URL}/api/v1/listing.help.json`
+
+ 
 
 ## Setup
 
