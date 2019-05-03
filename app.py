@@ -4,7 +4,8 @@ Flask entry point
 
 import os
 from flask import Flask, Blueprint
-from flask_restful import Api, Resource
+from flask_restful import Api
+from flask_restful_swagger import swagger
 import config
 from db.connectionManager import ConnectionManager
 from api.v1.listing import Listing
@@ -21,7 +22,11 @@ config_name = os.getenv('FLASK_CONFIGURATION', 'default')
 app = Flask(__name__)
 app.config.from_object(CONFIGS[config_name])
 api_blueprint = Blueprint('api', __name__)
-api = Api(api_blueprint)
+api = swagger.docs(
+    Api(api_blueprint),
+    apiVersion='0.1',
+    description='Swagger (Open API Spec) documentation for Datatrust'
+)
 print(app.config['STARTUP_MSG'])
 
 # Initialize DB Connection
