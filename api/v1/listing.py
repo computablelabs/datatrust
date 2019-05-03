@@ -56,7 +56,7 @@ class Listing(Resource):
                 "name": "listing",
                 "dataType": "string",
                 "allowMultiple": False,
-                "description": "The listing hash being added",
+                "description": "The listing hash being added. Expected to be a `keccak256` equivalent.",
                 "required": True,
                 "paramType": "body"
             },
