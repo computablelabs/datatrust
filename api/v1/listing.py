@@ -48,7 +48,6 @@ class Listing(Resource):
         if response == 'Error retrieving record':
             return {'message': 'Error retrieving record'}, 500
         else:
-            print(response)
             obfuscated_response = self.obfuscate_listing(response)
             return obfuscated_response, 200
 
@@ -183,8 +182,8 @@ class Listing(Resource):
         end_location = None
         for location in listing['data']:
             if 'velocity' in location:
-                sum_velocity = sum_velocity + float(location['velocity'])
-                velocity_points = velocity_points + 1
+                sum_velocity += float(location['velocity'])
+                velocity_points += 1
             if 'adjusted_timestamp' in location:
                 ts = datetime.strptime(location['adjusted_timestamp'], '%Y-%m-%d %H:%M:%S.%f')
                 if ts < start_timestamp:
