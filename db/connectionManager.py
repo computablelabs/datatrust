@@ -58,7 +58,6 @@ class ConnectionManager:
                     'listing': payload['listing']
                 }
             )
-            print(response)
             if 'Item' in response:
                 return response['Item']
             else:
