@@ -198,7 +198,7 @@ class Listing(Resource):
                         lat = round(float(location['latitude']), 2)
                         long = round(float(location['longitude']), 2)
                         end_location = f"{lat}, {long}"
-        obfuscated['avg_velocity'] = sum_velocity / velocity_points
+        obfuscated['avg_velocity'] = f'{str( round(float(sum_velocity / velocity_points), 1))} m/s'
         obfuscated['duration'] = self.elapsed_time(start_timestamp, end_timestamp)
         obfuscated['start_location'] = start_location
         obfuscated['end_location'] = end_location
