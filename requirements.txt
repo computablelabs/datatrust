@@ -9,7 +9,7 @@ Flask==1.0.2
 Flask-RESTful==0.3.7
 flask-restful-swagger==0.20.1
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2==2.11.3
 jmespath==0.9.4
 MarkupSafe==1.1.1
 more-itertools==7.0.0
